@@ -7,12 +7,16 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import StratifiedKFold
+from lightgbm import LGBMClassifier
 
 from src.config import ROOT_DIR, load_config
 from src.features import build_processed_datasets
 from src.nn_model import Classifier
 
 def make_models(config):
+    '''
+    Loading models from config
+    '''
     seed = config["project"]["seed"]
     catboost_params = config["models"]["catboost"]
     random_forest_params = config["models"]["random_forest"]
@@ -32,19 +36,27 @@ def make_models(config):
             **catboost_params,
         ),
         "neural_network": Classifier(
-        hidden_dims=[128, 64, 32],
-        dropout=0.3,
-        learning_rate=1e-3,
-        batch_size=32,
-        epochs=300,
-        patience=20,
-        device="cpu",
-        random_state=seed,
+            hidden_dims=[128, 64, 32],
+            dropout=0.3,
+            learning_rate=1e-3,
+            batch_size=32,
+            epochs=300,
+            patience=20,
+            device="cpu",
+            random_state=seed,
         ),
+        "lightgbm": LGBMClassifier(
+            random_state=seed,
+            verbose=-1,
+            **config["models"].get("lightgbm", {}),
+),
     }
 
 
 def score_model(y_true, predictions, probabilities):
+    '''
+    Scoring models
+    '''
     return {
         "accuracy": accuracy_score(y_true, predictions),
         "precision": precision_score(y_true, predictions, zero_division=0),

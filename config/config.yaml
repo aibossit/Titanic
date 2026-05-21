@@ -38,3 +38,5 @@ models:
     epochs: 300
     patience: 20
     device: cpu
+  lightgbm: 
+    {}
