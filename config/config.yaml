@@ -1,0 +1,40 @@
+project:
+  seed: 42
+
+paths:
+  raw_data_dir: data/raw
+  processed_data_dir: data/processed
+  models_dir: models
+  reports_dir: reports
+  model_file: titanic_model.joblib
+  metrics_file: metrics.json
+  submission_file: submission.csv
+
+data:
+  target_column: Survived
+
+validation:
+  n_splits: 5
+  shuffle: true
+  scoring: accuracy
+  n_jobs: -1
+
+models:
+  logistic_regression: {}
+  random_forest:
+    n_estimators: 300
+    max_depth: 6
+    min_samples_leaf: 2
+  catboost:
+    iterations: 300
+    depth: 4
+    learning_rate: 0.05
+    l2_leaf_reg: 3.0
+  neural_network:
+    hidden_dims: [128, 64, 32]
+    dropout: 0.3
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 300
+    patience: 20
+    device: cpu
