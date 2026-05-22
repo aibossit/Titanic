@@ -71,7 +71,7 @@ python -m src.predict
 
 ## Models
 
-The scripted pipeline compares Logistic Regression, Random Forest, and CatBoost. It selects the model with the best cross-validation accuracy and saves it to `models/titanic_model.joblib`.
+The scripted pipeline compares Logistic Regression, Random Forest, NeuralNetwork, LightGBM and CatBoost. It selects the model with the best cross-validation accuracy and saves it to `models/titanic_model.joblib`.
 
 ## Validation
 
@@ -88,6 +88,8 @@ Best scripted model: CatBoost.
 | Logistic Regression | 0.8058 | 0.7538 | 0.7337 | 0.7424 | 0.8595 |
 | Random Forest | 0.8350 | 0.8187 | 0.7338 | 0.7730 | 0.8764 |
 | CatBoost | 0.8440 | 0.8287 | 0.7485 | 0.7865 | 0.8831 |
+| Neural Network | 0.8159 | 0.7684 | 0.7484 | 0.757 | 0.8681 |
+| LightGBM | 0.826 | 0.779 | 0.763 | 0.771 | 0.8823 |
 
 | Metric | CV Mean | CV Std |
 |---|---:|---:|
