@@ -101,7 +101,7 @@ class Classifier(BaseEstimator, ClassifierMixin):
         return self
 
     def predict_proba(self, X):
-        """Возвращает вероятности для каждого класса"""
+
         self.model_.eval()
         
         if hasattr(X, 'values'):
@@ -115,7 +115,7 @@ class Classifier(BaseEstimator, ClassifierMixin):
         return np.column_stack([1 - proba_positive, proba_positive])
 
     def predict(self, X):
-        """Предсказывает классы"""
+
         proba = self.predict_proba(X)
         return (proba[:, 1] >= 0.5).astype(int)
 
